@@ -46,3 +46,27 @@ collection.add(
 )
 
 print("文書の登録が完了しました!")
+
+######################
+
+# クエリ(検索したい内容)
+query = "AIや機械学習について知りたい"
+
+# 類似文書の検索(上位3件)
+results = collection.query(
+    query_texts=[query],
+    n_results=3
+)
+
+print(f"\n検索クエリ: {query}\n")
+print("検索結果:")
+print("-" * 50)
+
+for i, (doc, metadata, distance) in enumerate(zip(
+    results['documents'][0],
+    results['metadatas'][0],
+    results['distances'][0]
+), 1):
+    print(f"\n{i}位 (類似度スコア: {1 - distance:.4f})")
+    print(f"文書: {doc}")
+    print(f"メタデータ: {metadata}")
