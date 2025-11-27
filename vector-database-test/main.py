@@ -70,3 +70,27 @@ for i, (doc, metadata, distance) in enumerate(zip(
     print(f"\n{i}位 (類似度スコア: {1 - distance:.4f})")
     print(f"文書: {doc}")
     print(f"メタデータ: {metadata}")
+
+######################
+
+# カテゴリを指定した検索
+query = "プログラミング言語について"
+
+results = collection.query(
+    query_texts=[query],
+    n_results=2,
+    where={"category": "programming"}  # programmingカテゴリのみに絞り込み
+)
+
+print(f"\n検索クエリ: {query}")
+print("フィルタ条件: category = 'programming'\n")
+print("検索結果:")
+print("-" * 50)
+
+for i, (doc, metadata) in enumerate(zip(
+    results['documents'][0],
+    results['metadatas'][0]
+), 1):
+    print(f"\n{i}位")
+    print(f"文書: {doc}")
+    print(f"メタデータ: {metadata}")
