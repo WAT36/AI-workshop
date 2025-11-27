@@ -94,3 +94,49 @@ for i, (doc, metadata) in enumerate(zip(
     print(f"\n{i}位")
     print(f"文書: {doc}")
     print(f"メタデータ: {metadata}")
+
+######################
+
+# OpenAIのEmbedding関数を定義
+def get_embedding(text):
+    response = openai.embeddings.create(
+        model="text-embedding-3-small",
+        input=text
+    )
+    return response.data[0].embedding
+
+# 新しいコレクションを作成(OpenAIのEmbeddingを使用)
+collection_openai = client.create_collection(
+    name="tech_articles_openai"
+)
+
+# Embeddingを生成して文書を追加
+embeddings = [get_embedding(doc) for doc in documents]
+
+collection_openai.add(
+    documents=documents,
+    embeddings=embeddings,
+    ids=ids,
+    metadatas=metadatas
+)
+
+# クエリのEmbeddingを生成して検索
+query = "データを扱う技術について"
+query_embedding = get_embedding(query)
+
+results = collection_openai.query(
+    query_embeddings=[query_embedding],
+    n_results=3
+)
+
+print(f"\n検索クエリ: {query}\n")
+print("OpenAI Embeddingを使った検索結果:")
+print("-" * 50)
+
+for i, (doc, metadata) in enumerate(zip(
+    results['documents'][0],
+    results['metadatas'][0]
+), 1):
+    print(f"\n{i}位")
+    print(f"文書: {doc}")
+    print(f"メタデータ: {metadata}")
