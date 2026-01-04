@@ -1,3 +1,8 @@
+# RAG拡張版、一旦退避
+rag_app.py
+
+###########
+
 # ChromaDB
 chroma_db/
 
