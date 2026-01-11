@@ -1,5 +1,4 @@
 import chromadb
-from chromadb.config import Settings
 import os
 from dotenv import load_dotenv
 import re
@@ -119,17 +118,17 @@ def prepare_vector_database():
         return
 
     print("\nChromaクライアントを初期化しています...")
-    client = chromadb.PersistentClient(path="./chroma_db")
+    chroma_client = chromadb.PersistentClient(path="./chroma_db")
 
     # 既存のコレクションがあれば削除
     try:
-        client.delete_collection(name="tech_knowledge_base")
+        chroma_client.delete_collection(name="tech_knowledge_base")
         print("✓ 既存のコレクションを削除しました")
     except:
         pass
 
     # 新しいコレクションを作成
-    collection = client.create_collection(
+    collection = chroma_client.create_collection(
         name="tech_knowledge_base",
         metadata={"description": "技術知識ベース"}
     )
@@ -167,7 +166,7 @@ def prepare_vector_database():
         query_embeddings=[test_query_embedding],  # query_textsではなくquery_embeddings
         n_results=1
     )
-    if test_results['documents']:
+    if test_results.get("documents") and test_results["documents"][0]:
         print(f"✓ テスト検索成功")
         print(f"  検索結果: {test_results['metadatas'][0][0]['title']}")
 
