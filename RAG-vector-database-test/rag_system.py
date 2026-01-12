@@ -20,8 +20,8 @@ class RAGSystem:
         Args:
             collection_name: 使用するChromaコレクション名
         """
-        self.client = chromadb.PersistentClient(path="./chroma_db")
-        self.collection = self.client.get_collection(name=collection_name)
+        self.chroma_client = chromadb.PersistentClient(path="./chroma_db")
+        self.collection = self.chroma_client.get_collection(name=collection_name)
         print(f"✓ コレクション '{collection_name}' を読み込みました")
 
     def get_embedding(self, text: str) -> List[float]:
