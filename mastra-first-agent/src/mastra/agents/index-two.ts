@@ -1,6 +1,6 @@
 import { Agent } from "@mastra/core/agent";
 import { openai } from "@ai-sdk/openai";
-import { getWeatherTool } from "../tools";
+import { getWeatherTool } from "../tools/index-two";
 
 // エージェントの定義
 export const myFirstAgent = new Agent({
