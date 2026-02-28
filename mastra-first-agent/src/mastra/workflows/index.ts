@@ -1,6 +1,6 @@
 import { createStep, createWorkflow } from "@mastra/core/workflows";
 import { z } from "zod";
-import { myFirstAgent } from "../agents/index-one";
+import { myFirstAgent } from "../agents";
 
 // ステップ1: アウトラインの生成
 const generateOutline = createStep({
