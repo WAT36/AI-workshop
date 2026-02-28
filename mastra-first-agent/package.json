@@ -18,7 +18,7 @@
     "node": ">=22.13.0"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^3.0.28",
+    "@ai-sdk/openai": "^3.0.36",
     "@mastra/core": "^1.4.0",
     "@mastra/evals": "^1.1.1",
     "@mastra/libsql": "^1.4.0",

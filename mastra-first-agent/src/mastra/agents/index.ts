@@ -1,6 +1,6 @@
 import { Agent } from "@mastra/core/agent";
 import { openai } from "@ai-sdk/openai";
-import { getWeatherTool } from "../tools/index-two";
+import { getWeatherTool } from "../tools";
 
 // エージェントの定義
 export const myFirstAgent = new Agent({
@@ -14,15 +14,16 @@ export const myFirstAgent = new Agent({
   model: openai("gpt-4o-mini"),
 });
 
+// ハンズオン２
 export const weatherAgent = new Agent({
   id: "weather-agent",
   name: "Weather Agent",
   instructions: `
-      あなたは天気情報を提供するアシスタントです。
-      ユーザーが天気について質問したら、get-weatherツールを使用して
-      天気情報を取得し、分かりやすく伝えてください。
-      日本語で応答してください。
-    `,
+          あなたは天気情報を提供するアシスタントです。
+          ユーザーが天気について質問したら、get-weatherツールを使用して
+          天気情報を取得し、分かりやすく伝えてください。
+          日本語で応答してください。
+        `,
   model: openai("gpt-4o-mini"),
   tools: {
     getWeatherTool,

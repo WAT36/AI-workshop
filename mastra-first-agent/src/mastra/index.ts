@@ -1,9 +1,9 @@
-import { Mastra } from "@mastra/core/mastra";
-import { myFirstAgent, weatherAgent } from "./agents/index-two";
-import { blogWorkflow } from "./workflows";
+import { Mastra } from "@mastra/core";
+import { myFirstAgent, weatherAgent } from "./agents";
 
 export const mastra = new Mastra({
-  //agents: { myFirstAgent },
-  agents: { weatherAgent },
-  workflows: { blogWorkflow },
+  agents: {
+    myFirstAgent, // ハンズオン１
+    weatherAgent, // ハンズオン２
+  },
 });

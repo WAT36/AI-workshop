@@ -1,51 +1,41 @@
-import { createStep, createWorkflow } from "@mastra/core/workflows";
+import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
-import { myFirstAgent } from "../agents/index-one";
 
-// ステップ1: アウトラインの生成
-const generateOutline = createStep({
-  id: "generate-outline",
+// 天気を取得するツール（モック）
+export const getWeatherTool = createTool({
+  id: "get-weather",
+  description: "指定された都市の現在の天気を取得します",
   inputSchema: z.object({
-    topic: z.string().describe("ブログ記事のトピック"),
+    city: z.string().describe("天気を取得したい都市名"),
   }),
   outputSchema: z.object({
-    outline: z.string(),
+    city: z.string(),
+    temperature: z.number(),
+    condition: z.string(),
   }),
-  execute: async ({ inputData }) => {
-    const response = await myFirstAgent.generate(
-      `以下のトピックについて、ブログ記事のアウトラインを作成してください：${inputData.topic}`
-    );
-    return { outline: response.text };
+  execute: async (context) => {
+    const { city } = context;
+
+    // 実際のアプリケーションでは外部APIを呼び出します
+    // ここではモックデータを返します
+    const mockWeatherData: Record<
+      string,
+      { temperature: number; condition: string }
+    > = {
+      東京: { temperature: 22, condition: "晴れ" },
+      大阪: { temperature: 24, condition: "曇り" },
+      札幌: { temperature: 15, condition: "雨" },
+    };
+
+    const weather = mockWeatherData[city] || {
+      temperature: 20,
+      condition: "不明",
+    };
+
+    return {
+      city,
+      temperature: weather.temperature,
+      condition: weather.condition,
+    };
   },
 });
-
-// ステップ2: 本文の生成
-const generateContent = createStep({
-  id: "generate-content",
-  inputSchema: z.object({
-    outline: z.string(),
-  }),
-  outputSchema: z.object({
-    content: z.string(),
-  }),
-  execute: async ({ inputData }) => {
-    const response = await myFirstAgent.generate(
-      `以下のアウトラインに基づいて、ブログ記事の本文を作成してください：\n${inputData.outline}`
-    );
-    return { content: response.text };
-  },
-});
-
-// ワークフローの定義
-export const blogWorkflow = createWorkflow({
-  id: "blog-generator",
-  inputSchema: z.object({
-    topic: z.string(),
-  }),
-  outputSchema: z.object({
-    content: z.string(),
-  }),
-});
-
-// ステップの連結
-blogWorkflow.then(generateOutline).then(generateContent).commit();
