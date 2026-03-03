@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "@langchain/core": "^1.1.29",
     "@langchain/openai": "^1.2.11",
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.3.3",
+    "dotenv": "^16.4.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }
