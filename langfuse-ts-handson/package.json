@@ -13,6 +13,10 @@
   "dependencies": {
     "@langchain/core": "^1.1.29",
     "@langchain/openai": "^1.2.11",
+    "@langfuse/client": "^4.6.1",
+    "@langfuse/otel": "^4.6.1",
+    "@langfuse/tracing": "^4.6.1",
+    "@opentelemetry/sdk-node": "^0.212.0",
     "langchain": "^1.2.28",
     "langfuse": "^3.38.6",
     "openai": "^6.25.0"

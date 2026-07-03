@@ -1,0 +1,46 @@
+# Environment variables (secrets)
+.env
+.env.*
+!.env.example
+
+# Claude Code local files
+.claude/
+
+# Dependencies
+node_modules/
+venv/
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+
+# Logs
+*.log
+logs/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test / coverage
+coverage/
+.nyc_output/
+.pytest_cache/
+.mypy_cache/
+
+# Local databases
+*.db
+*.db-*
+*.sqlite3
