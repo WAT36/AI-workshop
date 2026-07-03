@@ -1,0 +1,9 @@
+# Node.js
+node_modules/
+
+# Claude Code - 個人設定（環境依存のためgit管理対象外）
+.claude/settings.local.json
+.claude/todos/
+.claude/cache/
+
+# .claude/skills/ や .claude/settings.json はチーム共有のためgit管理対象

@@ -3,8 +3,10 @@
 .env.*
 !.env.example
 
-# Claude Code local files
-.claude/
+# Claude Code local files（個人設定のみ除外、スキル等は共有対象）
+.claude/settings.local.json
+.claude/todos/
+.claude/cache/
 
 # Dependencies
 node_modules/
